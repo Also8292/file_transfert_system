@@ -19,16 +19,23 @@
 
 
 /**
+ * all insert functions
+ */
+
+
+
+
+/**
  * insert new user (transmitter)
  * @param string nom
  * @param string email_emetteur
  * @param string message
  */
-function insert_emetteur($nom, $email_emetteur, $message) {
+function insert_emetteur($nom, $email_emetteur, $message, $random_value) {
     $con = database_connexion();
-    $query = 'INSERT INTO emetteurs(nom_emetteur, email_emetteur, file_message) VALUES (?, ?, ?)';
+    $query = 'INSERT INTO emetteurs(nom_emetteur, email_emetteur, file_message, random_value) VALUES (?, ?, ?, ?)';
     $request = $con->prepare($query);
-    $request->execute(array($nom, $email_emetteur, $message));
+    $request->execute(array($nom, $email_emetteur, $message, $random_value));
 }
 
 
@@ -38,11 +45,11 @@ function insert_emetteur($nom, $email_emetteur, $message) {
  * @param string date inserting file
  * @param integer id transmitter (emetteur)
  */
-function insert_file($url, $date, $id_emetteur) {
+function insert_file($url, $id_emetteur) {
     $con = database_connexion();
-    $query = 'INSERT INTO fichiers(file_url, date_transfert, id_emetteur) VALUES (?, ?, ?)';
+    $query = 'INSERT INTO fichiers(file_url, date_transfert, id_emetteur) VALUES (?, NOW(), ?)';
     $request = $con->prepare($query);
-    $request->execute(array($url, $date, $id_emetteur));
+    $request->execute(array($url, $id_emetteur));
 }
 
 
@@ -51,11 +58,11 @@ function insert_file($url, $date, $id_emetteur) {
  * insert receiver (destinataire)
  * @param string receiver email
  */
-function insert_receiver($email_recepteur) {
+function insert_receiver($email_recepteur, $id_emetteur) {
     $con = database_connexion();
-    $query = 'INSERT INTO recepteurs(email_recepteur) VALUES (?)';
+    $query = 'INSERT INTO recepteurs(email_recepteur, id_emetteur) VALUES (?, ?)';
     $request = $con->prepare($query);
-    $request->execute(array($email_recepteur));
+    $request->execute(array($email_recepteur, $id_emetteur));
 }
 
 
@@ -71,3 +78,85 @@ function file_receiver_link($id_file, $id_receiver) {
     $request = $con->prepare($query);
     $request->execute(array($id_file, $id_receiver));
 }
+
+
+
+
+/**
+ * end insert functions
+ */
+
+
+
+
+ /**
+  * all select functions
+  */
+
+
+
+
+/**
+ * get emetteur id
+ * @return request
+ */
+function get_emetteur($nom_emetteur, $email_emetteur, $message, $random_value) {
+    $con = database_connexion($nom_emetteur, $email_emetteur, $message);
+    $query = 'SELECT * FROM emetteurs WHERE nom_emetteur = ? AND email_emetteur = ? AND file_message = ? AND random_value = ?';
+    $request = $con->prepare($query);
+    $request->execute(array($nom_emetteur, $email_emetteur, $message, $random_value));
+
+    return $request;
+}
+
+
+/**
+ * get file id
+ * @return request
+ */
+function get_file($id_emetteur) {
+    $con = database_connexion();
+    $query = 'SELECT * FROM fichiers WHERE id_emetteur = ?';
+    $request = $con->prepare($query);
+    $request->execute(array($id_emetteur));
+
+    return $request;
+}
+
+
+/**
+ * get receiver id
+ * @return request
+ */
+function get_receiver($id_emetteur) {
+    $con = database_connexion();
+    $query = 'SELECT * FROM recepteurs WHERE id_emetteur = ?';
+    $request = $con->prepare($query);
+    $request->execute(array($id_emetteur));
+
+    return $request;
+}
+
+
+
+/**
+ * get file downloaded
+ * @return request
+ */
+function get_file_downloaded($id_emetteur) {
+    $con = database_connexion();
+    $query = 'SELECT file_url FROM fichiers, recepteurs, fichier_recepteur WHERE fichiers.id_fichier = fichier_recepteur.id_fichier AND recepteurs.id_recepteur = fichier_recepteur.id_recepteur AND recepteurs.id_emetteur = ?';
+    $request = $con->prepare($query);
+    $request->execute(array($id_emetteur));
+
+    return $request;
+}
+
+
+
+
+
+
+/**
+ * end select functions
+ */
