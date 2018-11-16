@@ -98,8 +98,7 @@ function get_receiver_id($id_emetteur) {
 /**
  * Moves uploaded file to our upload folder
  */
-function move_file() {
-    $path = $_FILES['file']['name'];
+function move_file($path) {
     $pathto = 'upload/'.$path;
     move_uploaded_file( $_FILES['file']['tmp_name'], $pathto) or 
     die( "Could not copy file!");
@@ -115,32 +114,13 @@ function move_file() {
 /**
  * send mail from transmitter to receiver
  */
-function send_mail($mail, $emetteur_id, $emetteur_name) {
-    $file_url = get_file_downloaded_url($emetteur_id);
+function send_mail($mail, $message) {
+    // $file_url = get_file_downloaded_url($emetteur_id);
 
     $header = "MIME-Version: 1.0\r\n";
-    $header .= 'From:"fiiw"<support@fiiw.com>'."\n";
+    $header .= 'From:"aquila"<support@aquila.com>'."\n";
     $header .= 'Content-Type:text/html; charset="utf-8"'."\n";
     $header .= 'Content-Transfert-Encoding: 8bit';
-
-    $message = '
-    <html>
-        <head>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
-        </head>
-        <body>
-            <div class="text-center">
-                <h3>Fiiw</h3>
-                <small>transfert de fichier</small>
-                <h2>' . $emetteur_name . '</h2>
-                <h4> vous a envoyé un fichier.</h4>
-                <a href="download?file=' . $file_url . '" target="_blank">
-                    <button class="btn btn-primary">Télécharger</button>
-                </a>
-            </div>
-        </body>
-    </html>
-    ';
 
     mail($mail,"Confimation de votre adresse mail", $message, $header);
 }
@@ -195,3 +175,22 @@ function random_value() {
     return $rand;
 }
 
+
+// $message = '
+//     <html>
+//         <head>
+//             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+//         </head>
+//         <body>
+//             <div class="text-center">
+//                 <h3>Aquila</h3>
+//                 <small>transfert de fichier</small>
+//                 <h2>' . $emetteur_name . '</h2>
+//                 <h4> vous a envoyé un fichier.</h4>
+//                 <a href="download?file=' . $file_url . '" target="_blank">
+//                     <button class="btn btn-primary">Télécharger</button>
+//                 </a>
+//             </div>
+//         </body>
+//     </html>
+//     ';

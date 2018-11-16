@@ -1,9 +1,64 @@
-<h1>Test</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>We Tranfer</title>
+    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/aa.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
 
-<form action="" method="POST">
+</head>
+<body>
+<div class="input-contain">
+    <div class="circle circle-quill">
+        <img src="public/images/logo.png" alt="" width="110"><br>
+    </div>
+    <div class="circle circle-paper">
+        <img src="public/images/logo.png" alt="" width="110"><br>
+    </div>
+    <h2 class="info">Ajouter vos fichiers</h2>
+    <h2 class="success">Success!</h2>
+    <form action="/" method="post" class="dropzone" id="my-awesome-dropzone"></form>
+    <div>
+        <br><br><br>
+        <p class="success-dialog">
+            We’ll be in touch shortly.<br>
+            In the meantime, <br>
+            check out our <br>
+            <a href="">Nouvelle envoie</a>
+        </p>
+    </div>
+   <form class="sub-form">
+       <input type="text" placeholder="Votre nom" name="name" id="nom" required="required" maxlength="50"/>
+       <input type="email" placeholder="Votre adresse e-mail" name="transmitter_email" required="required" maxlength="50"/>
+       <input type="email" id="firstname" name="receiver_name" placeholder="Envoyer à" required maxlength="50" />
+       <textarea placeholder="Message" id="message" name="message"></textarea>
+       <div class="allsub">
+           <div class="submit" name="submitBtn">Transférer</div>
+           <div class="submit-under"></div>
+       </div>
+       <svg class="loader" x="0px" y="0px" width="55px" height="55px" viewBox="0 0 55 55" enable-background="new 0 0 55 55" xml:space="preserve">
+             <circle fill="none" stroke-linecap="round" stroke="#B29EAC" stroke-width="2" stroke-miterlimit="10" cx="27.583" cy="27.334" r="26.583"/>
+       </svg>
+       <svg class="loader2" x="0px" y="0px" width="55px" height="55px" viewBox="0 0 55 55" enable-background="new 0 0 55 55" xml:space="preserve">
+            <circle fill="none" stroke-linecap="round" stroke="#B29EAC" stroke-width="2" stroke-miterlimit="10" cx="27.583" cy="27.334" r="26.583"/>
+       </svg>
+    </form>
+</div><!--input-contain-->
 
-    <label for="test">Test</label>
-    <input type="text" name="test" id="test" class="form-control" placeholder="" required>
-    <button type="submit" name="btnTest" class="btn btn-primary">Submit</button>
 
-</form>
+
+
+<ul class="slideshow">
+    <li><span>Image 01</span></li>
+    <li><span>Image 02</span></li>
+    <li><span>Image 03</span></li>
+    <li><span>Image 04</span></li>
+    <li><span>Image 05</span></li>
+    <li><span>Image 06</span></li>
+</ul>
+<script src="public/js/main.js"></script>
+</body>
+</html>

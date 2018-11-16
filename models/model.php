@@ -7,7 +7,7 @@
 
  function database_connexion() {
     try {
-        $connexion = new PDO('mysql:host=localhost;dbname=file_transfert;charset=utf8','root','');
+        $connexion = new PDO('mysql:host=localhost;dbname=alious_aquila;charset=utf8','alious','OnQf2bUe7m');
 
         return $connexion;
     }
