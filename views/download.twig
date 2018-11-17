@@ -104,8 +104,12 @@
     <br><br>
     <h2 class="info"></h2>
     <h2 class="success"></h2>
-    <form action="/" method="post" class="dropzone" id="my-awesome-dropzone"></form>
-   <form method="post" class="sub-form" enctype='multipart/form-data'>
+    {# <form action="/" method="post" class="dropzone" id="my-awesome-dropzone"></form> #}
+    <div class="dropzone" id="my-awesome-dropzone"></div>
+    <div>
+        <p>Message</p>
+    </div>
+    <form method="post" class="sub-form" enctype='multipart/form-data'>
        <p class="success-dialog">
            Votre tranfért <br>
            de fichiers a réussi<br>
@@ -114,14 +118,9 @@
            aprés réception de vos fichiers. <br>
            <a href="">Nouvelle envoie</a>
        </p>
-       <input type="file" name="new_file" id="new_file">
-       <input type="text" placeholder="Votre Nom et Prénom " name="name" id="nom" required="required" maxlength="50"/>
-       <input type="email" placeholder="Votre adresse e-mail" name="transmitter_email" required="required" maxlength="50"/>
-       <input type="email" id="firstname" name="receiver_email" placeholder="Envoyer à" required maxlength="50" />
-       <textarea placeholder="Message" id="message" name="message"></textarea>
        <div class="allsub">
-           {# <div class="submit">Transférer</div> #}
-           <button type="submit" name="submitBtn" class="submit">Transférer</button>
+           
+           <button type="submit" name="submitBtn" class="submit">Télécharger</button>
            <div class="submit-under"></div>
        </div>
        <svg class="loader" x="0px" y="0px" width="55px" height="55px" viewBox="0 0 55 55" enable-background="new 0 0 55 55" xml:space="preserve">

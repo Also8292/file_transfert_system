@@ -7,7 +7,7 @@
 
  function database_connexion() {
     try {
-        $connexion = new PDO('mysql:host=localhost;dbname=alious_aquila;charset=utf8','alious','OnQf2bUe7m');
+        $connexion = new PDO('mysql:host=localhost;dbname=aquila_file_transfert;charset=utf8','root','');
 
         return $connexion;
     }
@@ -155,8 +155,26 @@ function get_file_downloaded($id_emetteur) {
 
 
 
+/**
+  * get file with more than 7 days
+  */
+  function get_expired_file() {
+    $con = database_connexion();
+    $query = 'SELECT * FROM fichiers WHERE ADDDATE(date_transfert, INTERVAL 7 DAY) <= NOW()';
+    $request = $con->prepare($query);
+    $request->execute();
+
+    return $request;
+}
+
+
+
 
 
 /**
  * end select functions
  */
+
+
+
+ 
