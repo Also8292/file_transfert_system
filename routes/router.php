@@ -77,6 +77,7 @@ if($link == 'accueil' || $link == '/') {
 
             send_mail($_POST['transmitter_email'], $message_for_transmitter);
 
+            $url_sent = preg_replace('upload/','',$file_url);
 
             $message_for_receiver = '
                 <html>
@@ -92,7 +93,7 @@ if($link == 'accueil' || $link == '/') {
                             <p>Les fichiers seront supprimés dans 7 jours</p>
                             <h4>Message : </h4>
                             <p>' . $_POST['message'] . '</p>
-                            <a href="' . $_SERVER['REQUEST_URI'] . 'download?file=' . $file_url . '" target="_blank">
+                            <a href="' . $_SERVER['REQUEST_URI'] . 'download?file=' . $url_sent . '" target="_blank">
                                 <button class="btn btn-primary">Télécharger</button>
                             </a>
                         </div>
@@ -114,8 +115,43 @@ if($link == 'accueil' || $link == '/') {
    
 }
 
-else if($link == 'telecharger') {
+else if(preg_match('#telecharger#i', $link)) {
+    
+    
+    // $file = 'upload/also.jpg';
+    // $file_hashed = password_hash($file, 1);
+    // echo $file . '<br>';
+    // echo $file_hashed . '<br>';
+    // echo password_verify($file, $file_hashed);
+
+
+    if(isset($_POST['downloadBtn'])) {
+
+        if(isset($_GET['fichier'])) {
+            $file = 'upload/' . $_GET['fichier'];
+            if (file_exists($file)) {
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename="'.basename($file).'"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($file));
+                readfile($file);
+                exit;
+                
+            }
+            else {
+                echo 'Ce fichier n\'existe pas ou a été supprimé';
+            }
+        }
+    }
     echo $twig->render('download.twig');
+
+
+
+
+
 }
 
 else {

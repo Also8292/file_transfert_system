@@ -1,51 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Aquila</title>
-    <link rel="shortcut icon" href="public/images/favicon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="public/css/main.css">
-    <link rel="stylesheet" href="public/css/aa.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
+{% extends 'template/template.twig' %}
 
-</head>
-<body>
 
-<script >
-    $(document).ready(function(){
-        function openMenu() {
-            $(".menu-trigger").addClass("open");
-            $(".navigation").addClass("nav-open");
-            $(".col").addClass("c-in");
-        }
-        function closeMenu() {
-            $(".menu-trigger").removeClass("open");
-            $(".navigation").removeClass("nav-open");
-            $(".col").removeClass("c-in");
-        }
-        $(".menu-trigger").click(function(){
-            if($(".menu-trigger").hasClass("open")) {
-                closeMenu();
-            }
-            else {
-                openMenu();
-            }
-        });
-        $("main").click(function(){
-            if($(".menu-trigger").hasClass("open")) {
-                closeMenu();
-            }
-        });
-        $(document).keyup(function(e) {
-            if (e.keyCode == 27) {
-                closeMenu();
-            }
-        });
-    });
-
-</script>
+{% block content %}
 <div class="navigation">
     <div class="container">
         <div class="logo"><img src="public/images/logo1.png" width="210" alt=""></div>
@@ -111,16 +67,12 @@
     </div>
     <form method="post" class="sub-form" enctype='multipart/form-data'>
        <p class="success-dialog">
-           Votre tranfért <br>
-           de fichiers a réussi<br>
-           avec succés.<br>
-           Vous recevrez un mail <br>
-           aprés réception de vos fichiers. <br>
-           <a href="">Nouvelle envoie</a>
+           Téléchargement réussi !!!<br>
+           <a href="/ACS/file_transfert">Nouvelle envoie</a>
        </p>
        <div class="allsub">
            
-           <button type="submit" name="submitBtn" class="submit">Télécharger</button>
+           <button type="submit" name="downloadBtn" class="submit">Télécharger</button>
            <div class="submit-under"></div>
        </div>
        <svg class="loader" x="0px" y="0px" width="55px" height="55px" viewBox="0 0 55 55" enable-background="new 0 0 55 55" xml:space="preserve">
@@ -132,14 +84,5 @@
     </form>
 </div><!--input-contain-->
 
-<ul class="slideshow">
-    <li><span>Image 01</span></li>
-    <li><span>Image 02</span></li>
-    <li><span>Image 03</span></li>
-    <li><span>Image 04</span></li>
-    <li><span>Image 05</span></li>
-    <li><span>Image 06</span></li>
-</ul>
-<script src="public/js/main.js"></script>
-</body>
-</html>
+{% endblock %}
+

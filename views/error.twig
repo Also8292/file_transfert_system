@@ -1,4 +1,69 @@
+{% extends 'template/template.twig' %}
 
 
-la page {{ link }} n'a pas été trouvé
-{{ link }}
+{% block content %}
+
+<div class="navigation">
+    <div class="container">
+        <div class="logo"><img src="public/images/logo1.png" width="210" alt=""></div>
+        <nav>
+            <div class="col">
+                <div class="tof"><img src="public/images/arta.jpg" alt=""></div>
+                <h2 class="info">Adama R. T. Aidara</h2>
+                <div class="social-link"><a target="blank" href="https://github.com/artathiate"><img src="public/images/github.png" width="60%"></a></i></div>
+                <div class="social-link"><a target="blank" href="https://www.linkedin.com/in/arta-aidara-262573171/"><img src="public/images/linkedin.png" width="65%"></a></div>
+                <div class="social-link"><a target="blank" href="https://twitter.com/arta199302"><img src="public/images/twitter.png" width="60%"></a></div>
+            </div>
+            <div class="col">
+                <div class="tof"><img src="public/images/aliou.jpg" alt=""></div>
+                <h2 class="info">Aliou 'Also' Sow</h2>
+                <div class="social-link"><a target="blank" href="https://github.com/Also8292"><img src="public/images/github.png" width="60%"></a></i></div>
+                <div class="social-link"><a target="blank" href="https://www.linkedin.com/in/aliou-sow/"><img src="public/images/linkedin.png" width="65%"></a></div>
+                <div class="social-link"> <a target="blank" href="https://twitter.com/sowalils1992"><img src="public/images/twitter.png" width="60%"></a></div>
+            </div>
+            <div class="col">
+                <div class="tof"><img src="public/images/kalika.jpg" alt=""></div>
+                <h2 class="info">Papa Kalidou Mbodji</h2>
+                <div class="social-link"><a target="blank" href="https://github.com/kalika2015"><img src="public/images/github.png" width="60%"></a></i></div>
+                <div class="social-link"><a target="blank" href="https://www.linkedin.com/in/kalidou-papa-mbodji-b28723157/"><img src="public/images/linkedin.png" width="65%"></a></div>
+                <div class="social-link"> <a target="blank" href="https://twitter.com/kalidou2015"><img src="public/images/twitter.png" width="60%"></a></div>
+            </div>
+            <div class="col">
+                <div class="tof"><img src="public/images/ndeye.jpg" alt=""></div>
+                <h2 class="info">Ndeye Ndieunde Leye</h2>
+                <div class="social-link"><a target="blank" href="https://github.com/ndeye21"><img src="public/images/github.png" width="60%"></a></i></div>
+                <div class="social-link"><a target="blank" href="https://www.linkedin.com/in/ndeye-leye-16745ab1/"><img src="public/images/linkedin.png" width="65%"></a></div>
+                <div class="social-link"> <a target="blank" href="https://twitter.com/LeyeNdeye"><img src="public/images/twitter.png" width="60%"></a></div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="menu">
+    <div class="container">
+        <div class="menu-trigger">
+            <div class="bar bar--1"></div>
+            <div class="bar bar--2"></div>
+            <div class="bar bar--3"></div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="input-contain">
+    <div class="circle circle-quill">
+        <img src="public/images/logo1.png" alt="" width="110"><br>
+    </div>
+    <div class="circle circle-paper">
+        <img src="public/images/logo1.png" alt="" width="110"><br>
+    </div>
+    <br><br>
+    <h2 class="info"></h2>
+    <h2 class="success"></h2>
+    <p class="">
+        La page que vous demandez n'existe pas<br>
+        <a href="/ACS/file_transfert">Accueil</a>
+    </p>
+</div><!--input-contain-->
+
+{% endblock %}
