@@ -63,6 +63,7 @@ if($link == 'accueil' || $link == '/') {
                     </head>
                     <body>
                         <div class="text-center">
+                            <img src="http://alious.promo-21.codeur.online/aquila/public/images/logo.png" alt="">
                             <h3>Aquila</h3>
                             <small>transfert de fichier</small>
                             <h2>Fichiers envoyés à</h2>
@@ -77,7 +78,8 @@ if($link == 'accueil' || $link == '/') {
 
             send_mail($_POST['transmitter_email'], $message_for_transmitter);
 
-            $url_sent = preg_replace('upload/','',$file_url);
+            $base_url_sent = str_replace('upload/','',$file_url);
+            $url_sent = base64_encode($base_url_sent);
 
             $message_for_receiver = '
                 <html>
@@ -86,14 +88,14 @@ if($link == 'accueil' || $link == '/') {
                     </head>
                     <body>
                         <div class="text-center">
+                            <img src="http://alious.promo-21.codeur.online/aquila/public/images/logo.png" alt="" width="50" height="50">
                             <h3>Aquila</h3>
                             <small>transfert de fichier</small>
                             <h2>' . $_POST['name'] . '</h2>
                             <h4> vous a envoyé un fichier.</h4>
                             <p>Les fichiers seront supprimés dans 7 jours</p>
-                            <h4>Message : </h4>
-                            <p>' . $_POST['message'] . '</p>
-                            <a href="' . $_SERVER['REQUEST_URI'] . 'download?file=' . $url_sent . '" target="_blank">
+                            <p><strong>Message : </strong>' . $_POST['message'] . '</p>
+                            <a href="localhost' . $_SERVER['REQUEST_URI'] . 'telecharger?fichier=' . $url_sent . '" target="_blank">
                                 <button class="btn btn-primary">Télécharger</button>
                             </a>
                         </div>
@@ -128,7 +130,7 @@ else if(preg_match('#telecharger#i', $link)) {
     if(isset($_POST['downloadBtn'])) {
 
         if(isset($_GET['fichier'])) {
-            $file = 'upload/' . $_GET['fichier'];
+            $file = 'upload/' . base64_decode($_GET['fichier']);
             if (file_exists($file)) {
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
@@ -147,11 +149,11 @@ else if(preg_match('#telecharger#i', $link)) {
         }
     }
     echo $twig->render('download.twig');
+}
 
-
-
-
-
+else if($link == 'test') {
+    echo base64_encode  ('baye.jpg') . '<br>';
+    echo base64_decode(base64_encode  ('baye.jpg'));
 }
 
 else {
