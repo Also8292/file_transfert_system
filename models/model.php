@@ -12,7 +12,7 @@
         return $connexion;
     }
     catch(Exception $ex) {
-        die('Erreur de connexion à la base de données => ' . $ex->getMessage());
+        die('Erreur de connexion à la base de données');
     }
 }
 
@@ -165,6 +165,21 @@ function get_file_downloaded($id_emetteur) {
     $request->execute();
 
     return $request;
+}
+
+/**
+ * delete files expired in database
+ */
+function delete_file_db($id_file) {
+    $con = database_connexion();
+    $query1 = 'DELETE FROM fichier_recepteur WHERE fichier_recepteur.id_fichier = ?';
+    $query2 = 'DELETE FROM fichiers WHERE fichiers.id_fichier = ?';
+    
+    $request1 = $con->prepare($query1);
+    $request2 = $con->prepare($query2);
+
+    $request1->execute(array($id_file));
+    $request1->execute(array($id_file));
 }
 
 

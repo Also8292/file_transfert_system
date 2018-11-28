@@ -310,6 +310,7 @@ circle-quill {
     -moz-transition: opacity 190ms ease-out, transform 40ms ease-out;
     -ms-transition: opacity 190ms ease-out, transform 40ms ease-out;
 }
+
 .navigation .container {
     padding: 0 18px;
 }
@@ -774,4 +775,11 @@ ol,ul {
 }
 @media screen and (max-width: 600px) {
     .slideshow li div h3 { font-size: 50px }
+}
+
+@media screen and (max-width: 600px) {
+    .input-contain {
+        background: #ff0000;
+        
+    }
 }

@@ -18,7 +18,7 @@ $link = basename($_SERVER['REQUEST_URI']);
 
 
 //replace project name by /
-if($link == 'file_transfert') {
+if($link == 'aquila') {
     $link = '/';
 }
 
@@ -95,7 +95,7 @@ if($link == 'accueil' || $link == '/') {
                             <h4> vous a envoyé un fichier.</h4>
                             <p>Les fichiers seront supprimés dans 7 jours</p>
                             <p><strong>Message : </strong>' . $_POST['message'] . '</p>
-                            <a href="localhost' . $_SERVER['REQUEST_URI'] . 'telecharger?fichier=' . $url_sent . '" target="_blank">
+                            <a href="http://alious.promo-21.codeur.online/aquila/telecharger?fichier=' . $url_sent . '" target="_blank">
                                 <button class="btn btn-primary">Télécharger</button>
                             </a>
                         </div>
@@ -118,14 +118,6 @@ if($link == 'accueil' || $link == '/') {
 }
 
 else if(preg_match('#telecharger#i', $link)) {
-    
-    
-    // $file = 'upload/also.jpg';
-    // $file_hashed = password_hash($file, 1);
-    // echo $file . '<br>';
-    // echo $file_hashed . '<br>';
-    // echo password_verify($file, $file_hashed);
-
 
     if(isset($_POST['downloadBtn'])) {
 
@@ -140,20 +132,38 @@ else if(preg_match('#telecharger#i', $link)) {
                 header('Pragma: public');
                 header('Content-Length: ' . filesize($file));
                 readfile($file);
+
+
+                $download_feed_back = '
+                <html>
+                    <head>
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                    </head>
+                    <body>
+                        <div class="text-center">
+                            <img src="http://alious.promo-21.codeur.online/aquila/public/images/logo.png" alt="" width="50" height="50">
+                            <h3>Aquila</h3>
+                            <small>transfert de fichier</small>
+                            <h2>' . $_POST['name'] . '</h2>
+                            <h4> Votre fichier vient d\'être téléchargé.</h4>
+                            <p>Merci d\'avoir utilisé Aquila !!!</p>
+                        </div>
+                    </body>
+                </html>
+                ';
+
+                send_mail($_POST['transmitter_email'], $download_feed_back);
+
+
                 exit;
                 
             }
             else {
-                echo 'Ce fichier n\'existe pas ou a été supprimé';
+                echo 'Le fichier que vous essayez de télécharger n\'existe pas ou a été supprimé.';
             }
         }
     }
     echo $twig->render('download.twig');
-}
-
-else if($link == 'test') {
-    echo base64_encode  ('baye.jpg') . '<br>';
-    echo base64_decode(base64_encode  ('baye.jpg'));
 }
 
 else {

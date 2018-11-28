@@ -164,8 +164,11 @@ function get_file_downloaded_url($id_emetteur) {
 function auto_delete() {
     $request = get_expired_file();
     while($result = $request->fetch()) {
+        delete_file_db($result['id_fichier']);
         $file = $result['file_url'];
-        unlink($file);
+        if(file_exists($file)) {
+            unlink($file);
+        }
     }
 }
 
