@@ -58,6 +58,29 @@
     <li><span>Image 06</span></li>
 </ul>
 <script src="public/js/main.js"></script>
+<script>
+
+function valid_btn() {
+    var fichier = document.querySelector('#new_file').value;
+    var emetteur = document.querySelector('#nom').value;
+    var emetteurEmail = document.querySelector('#transmitter_email').value;
+    var destinataire = document.querySelector('#firstname').value;
+    var message = document.querySelector('#message').value;
+    
+    var transfert_btn = document.querySelector('#transfert_btn');
+
+    if(fichier != "" && emetteur != "" && emetteurEmail != "" && destinataire != "" && message != "") {
+        transfert_btn.style.backgroundColor = "green";
+        transfert_btn.disabled = false;
+    }
+    else {
+        transfert_btn.disabled = true;
+        transfert_btn.style.backgroundColor = "red";
+    }
+}
+
+</script>
+
 </body>
 </html>
 

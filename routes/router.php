@@ -29,7 +29,7 @@ if($link == 'accueil' || $link == '/') {
 
     //when submit button is clicked
     if(isset($_POST['submitBtn'])) {
-        if(isset($_POST['name']) && isset($_POST['transmitter_email']) && isset($_POST['receiver_email']) && isset($_POST['message'])) {
+        if(isset($_POST['name']) && isset($_POST['transmitter_email']) && isset($_POST['receiver_email']) && isset($_POST['message']) && $_FILES['new_file']['name']) {
             $random_value = random_value();
             $path = $_FILES['new_file']['name'];
             $file_url = move_file($path);
@@ -111,7 +111,8 @@ if($link == 'accueil' || $link == '/') {
 
         }
         else {
-            echo "Veuillez remplir touts les champs !!!";
+            // echo $twig->render('accueil.twig', ['error' => 'Veuillez remplir tous les champs !!!']);
+            echo "<script>alert('Veuillez remplir tous les champs !!!');</script>";
         }
     }
    
@@ -159,7 +160,8 @@ else if(preg_match('#telecharger#i', $link)) {
                 
             }
             else {
-                echo 'Le fichier que vous essayez de télécharger n\'existe pas ou a été supprimé.';
+                echo $twig->render('accueil.twig', ['error' => 'Le fichier que vous essayez de télécharger n\'existe pas ou a été supprimé. !!!']);
+                // echo "<script>alert('Le fichier que vous essayez de télécharger n\'existe pas ou a été supprimé. !!!');</script>";
             }
         }
     }

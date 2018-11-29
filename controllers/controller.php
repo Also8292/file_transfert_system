@@ -177,7 +177,7 @@ function auto_delete() {
 
 /**
  * generate random value
- * @return random with 20 characters
+ * @return random with 10 characters
  */
 function random_value() {
     $rand = '';

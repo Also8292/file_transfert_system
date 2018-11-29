@@ -70,14 +70,18 @@
            aprés réception de vos fichiers. <br>
            <a href="">Nouvelle envoie</a>
        </p>
-       <input type="file" name="new_file" id="new_file" multiple>
-       <input type="text" placeholder="Votre Nom et Prénom " name="name" id="nom" required="required" maxlength="50"/>
-       <input type="email" placeholder="Votre adresse e-mail" name="transmitter_email" required="required" maxlength="50"/>
-       <input type="email" id="firstname" name="receiver_email" placeholder="Envoyer à" required maxlength="50" />
-       <textarea placeholder="Message" id="message" name="message"></textarea>
+       <input type="file" name="new_file" id="new_file" multiple onkeyup="valid_btn()">
+       {# <input name="upload[]" type="file" multiple="multiple" /> #}
+       <input type="text" placeholder="Votre Nom" name="name" id="nom" required="required" maxlength="50" onkeyup="valid_btn()">
+       <input type="email" placeholder="Votre adresse e-mail" id="transmitter_email" name="transmitter_email" required="required" maxlength="50" onkeyup="valid_btn()">
+       <input type="email" id="firstname" name="receiver_email" placeholder="Le destinataire" required maxlength="50" onkeyup="valid_btn()">
+       <textarea placeholder="Message" id="message" name="message" onkeyup="valid_btn()"></textarea>
        <div class="allsub">
            {# <div class="submit">Transférer</div> #}
-           <button type="submit" name="submitBtn" class="submit">Transférer</button>
+           <button type="submit" name="submitBtn" id="transfert_btn" class="submit">Transférer</button>
+           <script>
+            document.querySelector('#transfert_btn').disabled = true;
+           </script>
            <div class="submit-under"></div>
        </div>
        <svg class="loader" x="0px" y="0px" width="55px" height="55px" viewBox="0 0 55 55" enable-background="new 0 0 55 55" xml:space="preserve">
