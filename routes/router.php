@@ -29,10 +29,10 @@ if($link == 'accueil' || $link == '/') {
 
     //when submit button is clicked
     if(isset($_POST['submitBtn'])) {
-        if(isset($_POST['name']) && isset($_POST['transmitter_email']) && isset($_POST['receiver_email']) && isset($_POST['message']) && $_FILES['new_file']['name']) {
+        if(isset($_POST['name']) && isset($_POST['transmitter_email']) && isset($_POST['receiver_email']) && isset($_POST['message']) && $_FILES['file']['name']) {
             $random_value = random_value();
-            // $path = $_FILES['new_file']['name'];
-            $file_url = compress();
+            $path = $_FILES['file']['name'];
+            $file_url = compress($path);
 
             //insert new transmitter (emetteur)
             new_emetteur($_POST['name'], $_POST['transmitter_email'], $_POST['message'], $random_value);
@@ -43,7 +43,7 @@ if($link == 'accueil' || $link == '/') {
             $id_emetteur = get_emetteur_id($_POST['name'], $_POST['transmitter_email'], $_POST['message'], $random_value);
 
             //insert the file
-            new_file($file_url, $id_emetteur);
+            new_file($file_url . '.zip', $id_emetteur);
 
             //insert receiver
             new_receiver($_POST['receiver_email'], $id_emetteur);
@@ -95,7 +95,7 @@ if($link == 'accueil' || $link == '/') {
                             <h4> vous a envoyé un fichier.</h4>
                             <p>Les fichiers seront supprimés dans 7 jours</p>
                             <p><strong>Message : </strong>' . $_POST['message'] . '</p>
-                            <a href="http://alious.promo-21.codeur.online/aquila/telecharger?fichier=' . $url_sent . '" target="_blank">
+                            <a href="http://localhost/ACS/aquila/telecharger?fichier=' . $url_sent . '" target="_blank">
                                 <button class="btn btn-primary">Télécharger</button>
                             </a>
                         </div>
@@ -123,7 +123,7 @@ else if(preg_match('#telecharger#i', $link)) {
     if(isset($_POST['downloadBtn'])) {
 
         if(isset($_GET['fichier'])) {
-            $file = 'upload/' . base64_decode($_GET['fichier']);
+            $file = 'upload/' . base64_decode($_GET['fichier']) . '.zip';
             if (file_exists($file)) {
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');

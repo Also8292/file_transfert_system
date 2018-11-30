@@ -193,19 +193,19 @@ function random_value() {
 /**
  * compress file uploaded in zip file
  */
-function compress() {
-        $nameFile = $_FILES['file']['name'];
+function compress($nameFile) {
+        // $nameFile = $_FILES['file']['name'];
         $pathinfo = pathinfo($nameFile);
         $file = $pathinfo['filename'];
         $tmpName = $_FILES['file']['tmp_name'];
-        $download_folder = 'aquila_upload/';
+        $download_folder = 'upload/';
         $filepath = "upload_tmp/" . $_FILES["file"]["name"];
 
         if(move_uploaded_file($tmpName, $filepath)) {
             $zip = new ZipArchive();
-            $fileconpress = $download_folder.$file.".zip";
+            $filecompress = $download_folder.$file.".zip";
 
-            $compress = $zip->open($fileconpress, ZIPARCHIVE::CREATE);
+            $compress = $zip->open($filecompress, ZIPARCHIVE::CREATE);
         
             if ($compress === true) {
                 $zip->addFile($filepath);
