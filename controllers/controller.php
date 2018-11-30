@@ -188,3 +188,35 @@ function random_value() {
     return intval($rand);
 }
 
+
+
+/**
+ * compress file uploaded in zip file
+ */
+function compress() {
+        $nameFile = $_FILES['file']['name'];
+        $pathinfo = pathinfo($nameFile);
+        $file = $pathinfo['filename'];
+        $tmpName = $_FILES['file']['tmp_name'];
+        $download_folder = 'aquila_upload/';
+        $filepath = "upload_tmp/" . $_FILES["file"]["name"];
+
+        if(move_uploaded_file($tmpName, $filepath)) {
+            $zip = new ZipArchive();
+            $fileconpress = $download_folder.$file.".zip";
+
+            $compress = $zip->open($fileconpress, ZIPARCHIVE::CREATE);
+        
+            if ($compress === true) {
+                $zip->addFile($filepath);
+                $zip->close();
+            }
+            else {
+                echo "Oh No! Error";
+            }
+        }
+        unlink($filepath);
+
+        $zip_file_url = $download_folder . $file;
+        return $zip_file_url;
+}

@@ -31,8 +31,8 @@ if($link == 'accueil' || $link == '/') {
     if(isset($_POST['submitBtn'])) {
         if(isset($_POST['name']) && isset($_POST['transmitter_email']) && isset($_POST['receiver_email']) && isset($_POST['message']) && $_FILES['new_file']['name']) {
             $random_value = random_value();
-            $path = $_FILES['new_file']['name'];
-            $file_url = move_file($path);
+            // $path = $_FILES['new_file']['name'];
+            $file_url = compress();
 
             //insert new transmitter (emetteur)
             new_emetteur($_POST['name'], $_POST['transmitter_email'], $_POST['message'], $random_value);
